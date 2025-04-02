@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebStudio - Создаем продающие сайты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --dark: #1e1e24;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #4bb543;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* USP Section */
+        .usp {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .usp-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .usp-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .usp-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .usp-card h3 {
+            margin-bottom: 15px;
+        }
+        
+        .usp-card p {
+            color: var(--gray);
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .portfolio-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 50px;
+            background: none;
+            border: 1px solid var(--gray);
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            background: rgba(67, 97, 238, 0.9);
+            color: white;
+            padding: 20px;
+            transition: bottom 0.3s;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            bottom: 0;
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 20px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+            text-align: right;
+        }
+        
+        .right {
+            left: 50%;
+            text-align: left;
+        }
+        
+        .left::after {
+            right: -12px;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .timeline-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            margin: 0 20px;
+        }
+        
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+        }
+        
+        /* Contact Form */
+        .contact {
+            padding: 80px 0;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Manrope', sans-serif;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 20px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #adb5bd;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .left, .right {
+                left: 0;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">WebStudio</a>
+                <div class="nav-links">
+                    <a href="#services">Услуги</a>
+                    <a href="#portfolio">Портфолио</a>
+                    <a href="#process">Процесс</a>
+                    <a href="#contact">Контакты</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Создаём сайты, которые продают</h1>
+            <p>Профессиональная разработка сайтов под ключ с гарантией результата. От лендингов до сложных веб-приложений.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Обсудить проект</a>
+                <a href="#portfolio" class="btn btn-secondary">Посмотреть кейсы</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- USP Section -->
+    <section class="usp" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Почему выбирают нас</h2>
+                <p>Мы предлагаем не просто создание сайта, а комплексное решение для вашего бизнеса</p>
+            </div>
+            <div class="usp-grid">
+                <div class="usp-card">
+                    <div class="usp-icon">🚀</div>
+                    <h3>Быстрый запуск</h3>
+                    <p>Готовый лендинг за 7 дней с момента утверждения дизайна</p>
+                </div>
+                <div class="usp-card">
+                    <div class="usp-icon">🔍</div>
+                    <h3>SEO-оптимизация</h3>
+                    <p>Все наши сайты оптимизированы для поисковых систем</p>
+                </div>
+                <div class="usp-card">
+                    <div class="usp-icon">📱</div>
+                    <h3>Адаптивный дизайн</h3>
+                    <p>Идеальное отображение на всех устройствах</p>
+                </div>
+                <div class="usp-card">
+                    <div class="usp-icon">🛡️</div>
+                    <h3>Поддержка 24/7</h3>
+                    <p>Круглосуточная техническая поддержка вашего сайта</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши работы</h2>
+                <p>Посмотрите примеры наших последних проектов</p>
+            </div>
+            <div class="portfolio-filter">
+                <button class="filter-btn active">Все</button>
+                <button class="filter-btn">Лендинги</button>
+                <button class="filter-btn">Интернет-магазины</button>
+                <button class="filter-btn">Корпоративные</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://source.unsplash.com/random/600x400/?website,design" alt="Проект 1">
+                    <div class="portfolio-overlay">
+                        <h3>Лендинг для студии йоги</h3>
+                        <p>Увеличение конверсии на 40%</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://source.unsplash.com/random/600x400/?ecommerce,shop" alt="Проект 2">
+                    <div class="portfolio-overlay">
+                        <h3>Интернет-магазин косметики</h3>
+                        <p>Рост продаж на 120% за 3 месяца</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://source.unsplash.com/random/600x400/?business,corporate" alt="Проект 3">
+                    <div class="portfolio-overlay">
+                        <h3>Корпоративный сайт</h3>
+                        <p>Современный дизайн для IT-компании</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://source.unsplash.com/random/600x400/?app,interface" alt="Проект 4">
+                    <div class="portfolio-overlay">
+                        <h3>Веб-приложение</h3>
+                        <p>CRM система для малого бизнеса</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>Как мы работаем</h2>
+                <p>Прозрачный процесс разработки от идеи до реализации</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Брифование</h3>
+                        <p>Анализируем ваши цели, целевую аудиторию и составляем техническое задание</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Прототип</h3>
+                        <p>Создаем интерактивный прототип будущего сайта для согласования структуры</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Дизайн</h3>
+                        <p>Разрабатываем уникальный дизайн, соответствующий вашему бренду</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Разработка</h3>
+                        <p>Программируем функционал сайта с использованием современных технологий</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Запуск</h3>
+                        <p>Тестируем, оптимизируем и публикуем ваш сайт в интернете</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Отзывы клиентов</h2>
+                <p>Что говорят о нас наши клиенты</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <img src="https://source.unsplash.com/random/200x200/?portrait,man" alt="Клиент 1">
+                    <p>"WebStudio создали для нас потрясающий интернет-магазин. За 2 месяца продажи выросли в 3 раза. Очень профессиональный подход!"</p>
+                    <div class="testimonial-author">Алексей Петров, CEO CosmoShop</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Готовы обсудить ваш проект?</h2>
+                <p>Оставьте заявку и мы свяжемся с вами в течение 15 минут</p>
+            </div>
+            <div class="form-container">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Опишите ваш проект</label>
+                        <textarea id="message"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>WebStudio</h3>
+                    <p>Создаем продающие сайты с 2018 года. Более 150 успешных проектов.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Услуги</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Разработка сайтов</a></li>
+                        <li><a href="#">Дизайн</a></li>
+                        <li><a href="#">SEO-продвижение</a></li>
+                        <li><a href="#">Поддержка</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+79991234567">+7 (999) 123-45-67</a></li>
+                        <li><a href="mailto:info@webstudio.ru">info@webstudio.ru</a></li>
+                        <li>Москва, ул. Примерная, 15</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Соцсети</h3>
+                    <div class="social-links">
+                        <a href="#">VK</a>
+                        <a href="#">TG</a>
+                        <a href="#">Be</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 WebStudio. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
